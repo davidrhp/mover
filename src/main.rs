@@ -1,12 +1,10 @@
-use std::error::Error;
-
 use clap::Parser;
 
 use mover::cli::Cli;
 use mover::cli::command::Execute;
 use mover::config::Config;
 
-fn main() -> Result<(), Box<dyn Error>> {
+fn main() -> anyhow::Result<()> {
     let cli: Cli = Cli::parse();
     init_logger(&cli);
 

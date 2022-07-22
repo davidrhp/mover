@@ -1,5 +1,3 @@
-use std::error::Error;
-
 use clap::clap_derive::Subcommand;
 
 use crate::cli::command::ls::List;
@@ -18,7 +16,7 @@ pub enum Command {
 }
 
 impl Execute for Command {
-    fn execute(&self, cfg: Config) -> Result<(), Box<dyn Error>> {
+    fn execute(&self, cfg: Config) -> anyhow::Result<()> {
         match self {
             Self::List(cmd) => cmd.execute(cfg),
             Self::Move(cmd) => cmd.execute(cfg),
@@ -27,5 +25,5 @@ impl Execute for Command {
 }
 
 pub trait Execute {
-    fn execute(&self, cfg: Config) -> Result<(), Box<dyn Error>>;
+    fn execute(&self, cfg: Config) -> anyhow::Result<()>;
 }

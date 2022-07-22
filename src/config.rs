@@ -1,17 +1,24 @@
-use std::fs;
+use std::{fmt, fs};
+use std::fmt::Formatter;
 use std::path::PathBuf;
 
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, Default)]
 pub struct Config {
-    locations: Vec<Location>,
+    pub locations: Vec<Location>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Location {
-    name: String,
-    url: url::Url,
+    pub name: String,
+    pub url: url::Url,
+}
+
+impl fmt::Display for Location {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        write!(f, "{} -> {}", self.name, self.url)
+    }
 }
 
 impl Config {

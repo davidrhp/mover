@@ -1,5 +1,3 @@
-use std::error::Error;
-
 use clap::clap_derive::Args;
 
 use crate::cli::command::Execute;
@@ -17,7 +15,7 @@ pub struct Move {
 }
 
 impl Execute for Move {
-    fn execute(&self, cfg: Config) -> Result<(), Box<dyn Error>> {
+    fn execute(&self, cfg: Config) -> anyhow::Result<()>{
         println!("config: {:#?}", cfg);
         Ok(())
     }
