@@ -10,8 +10,10 @@ mod mv;
 #[derive(Subcommand)]
 pub enum Command {
     /// List available locations
+    #[clap(alias("ls"))]
     List(List),
     /// Move <SRC> to <DST>
+    #[clap(alias("mv"))]
     Move(Move),
 }
 
