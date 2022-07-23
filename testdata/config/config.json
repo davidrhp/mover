@@ -1,11 +1,11 @@
 {
   "locations": [
     {
-      "name": "example",
+      "name": "exampleFile",
       "url": "file:///Users/davidrhp/go/src/mover/testdata/txt/example.txt"
     },
     {
-      "name": "txtDir",
+      "name": "exampleDir",
       "url": "file:///Users/davidrhp/go/src/mover/testdata/txt/"
     }
   ]

@@ -1,10 +1,13 @@
 use std::{fmt, fs};
 use std::fmt::Formatter;
-use std::path::PathBuf;
+use std::path::Path;
+
 use ansi_term::Color::Green;
-
-
 use serde::{Deserialize, Serialize};
+
+#[cfg(test)]
+mod tests;
+
 
 #[derive(Debug, Serialize, Deserialize, Default)]
 pub struct Config {
@@ -26,7 +29,7 @@ impl fmt::Display for Location {
 }
 
 impl Config {
-    pub fn from_path(path: &PathBuf) -> Config {
+    pub fn from_path(path: &Path) -> Config {
         let json = fs::read_to_string(path).unwrap_or_else(|err| {
             panic!("could not load config from '{}': {}", path.display(), err)
         });
