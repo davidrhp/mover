@@ -1,0 +1,12 @@
+{
+  "locations": [
+    {
+      "name": "example",
+      "url": "file:///Users/davidrhp/go/src/mover/testdata/txt/example.txt"
+    },
+    {
+      "name": "txtDir",
+      "url": "file:///Users/davidrhp/go/src/mover/testdata/txt/"
+    }
+  ]
+}

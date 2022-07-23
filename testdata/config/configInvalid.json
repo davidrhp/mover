@@ -1,0 +1,8 @@
+{
+  "locations": [
+    {
+      "name": "example",
+      "url": "file:///Users/davidrhp/go/src/mover/testdata/txt/example.txt"
+    }
+  ]
+} // comment to make json invalid
