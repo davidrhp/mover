@@ -2,7 +2,7 @@ use std::{fmt, fs};
 use std::fmt::Formatter;
 use std::path::Path;
 
-use ansi_term::Color::Green;
+use ansi_term::Style;
 use serde::{Deserialize, Serialize};
 
 #[cfg(test)]
@@ -23,7 +23,7 @@ pub struct Location {
 impl fmt::Display for Location {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         write!(f, "{} --- {}",
-               Green.bold().paint(&self.name),
+               Style::new().bold().paint(&self.name),
                self.url)
     }
 }

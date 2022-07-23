@@ -2,8 +2,7 @@ use std::fs;
 use std::io::stdout;
 use std::io::Write;
 
-use ansi_term::Color::Red;
-use ansi_term::Style;
+use ansi_term::Color::{Green, Red};
 use anyhow::Context;
 use clap::clap_derive::Args;
 
@@ -42,9 +41,9 @@ fn mv_msg_details(from: &Location, to: &Location) -> String {
 }
 
 fn mv_msg_success(from: &Location, to: &Location) -> String {
-    format!("{} {}", Style::new().bold().paint("moved"), mv_msg_details(from, to))
+    format!("{}\t{}", Green.bold().paint("moved"), mv_msg_details(from, to))
 }
 
 fn mv_msg_failure(from: &Location, to: &Location) -> String {
-    format!("{} {}", Red.bold().paint("could not move"), mv_msg_details(from, to))
+    format!("{}\t{}", Red.bold().paint("could not move"), mv_msg_details(from, to))
 }
