@@ -10,6 +10,20 @@ const EXAMPLE_FILE: &str = "exampleFile";
 const EXAMPLE_DIR: &str = "exampleDir";
 const EXAMPLE_URL: &str = "file:///Users/davidrhp/go/src/mover/testdata/txt/example.txt";
 
+pub fn test_config() -> Config {
+    Config{
+        locations: vec![test_location()]
+    }
+}
+
+pub fn test_location() -> Location {
+    Location {
+        name: String::from(EXAMPLE_FILE),
+        url: url::Url::from_str(EXAMPLE_URL)
+            .expect("could not create test location"),
+    }
+}
+
 #[test]
 fn from_path() -> anyhow::Result<()> {
     let path = PathBuf::from_str(TEST_CONFIG_VALID)
@@ -36,10 +50,7 @@ fn from_path_file_not_found() {
 
 #[test]
 fn location_display() -> anyhow::Result<()>{
-    let loc = Location {
-        name: String::from(EXAMPLE_FILE),
-        url: url::Url::from_str(EXAMPLE_URL)?,
-    };
+    let loc = test_location();
 
     let actual = format!("{}", loc);
     assert!(actual.contains(EXAMPLE_FILE));

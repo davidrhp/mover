@@ -6,7 +6,7 @@ use ansi_term::Color::Green;
 use serde::{Deserialize, Serialize};
 
 #[cfg(test)]
-mod tests;
+pub mod tests;
 
 
 #[derive(Debug, Serialize, Deserialize, Default)]
