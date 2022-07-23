@@ -25,17 +25,26 @@ impl Execute for Move {
     fn execute(&self, cfg: Config) -> anyhow::Result<()> {
         let src_loc = cfg.location_by_name(&self.src)?;
         let dst_loc = cfg.location_by_name(&self.dst)?;
-        move_local(stdout().lock(), src_loc, dst_loc)
+        mv_local(stdout().lock(), src_loc, dst_loc)
     }
 }
 
-fn move_local(mut w: impl Write, from: &Location, to: &Location) -> anyhow::Result<()> {
-    let move_details = format!("{} -> {}", from, to);
-
+fn mv_local(mut w: impl Write, from: &Location, to: &Location) -> anyhow::Result<()> {
     fs::rename(from.url.path(), to.url.path())
-        .with_context(|| format!(
-            "{} {}", Red.bold().paint("could not move"), move_details))?;
+        .with_context(|| mv_msg_failure(from, to))?;
 
-    writeln!(w, "{} {}", Style::new().bold().paint("moved"), move_details)
+    writeln!(w, "{}", mv_msg_success(from, to))
         .map_err(anyhow::Error::new)
+}
+
+fn mv_msg_details(from: &Location, to: &Location) -> String {
+    format!("{} -> {}", from, to)
+}
+
+fn mv_msg_success(from: &Location, to: &Location) -> String {
+    format!("{} {}", Style::new().bold().paint("moved"), mv_msg_details(from, to))
+}
+
+fn mv_msg_failure(from: &Location, to: &Location) -> String {
+    format!("{} {}", Red.bold().paint("could not move"), mv_msg_details(from, to))
 }

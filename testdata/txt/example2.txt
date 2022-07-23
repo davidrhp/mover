@@ -1,1 +1,1 @@
-Content of example.txt
+Content of example2.txt
