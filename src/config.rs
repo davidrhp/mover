@@ -22,7 +22,7 @@ pub struct Location {
 
 impl fmt::Display for Location {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "{} -> {}",
+        write!(f, "{} --- {}",
                Green.bold().paint(&self.name),
                self.url)
     }
@@ -36,5 +36,12 @@ impl Config {
 
         serde_json::from_str(&json)
             .unwrap_or_else(|err| panic!("could not deserialize json \n'{}'\n: {}", json, err))
+    }
+
+    pub fn location_by_name(&self, name: &str) -> anyhow::Result<&Location> {
+        self.locations.iter()
+            .find(|loc| loc.name == name)
+            .ok_or_else(|| format!("name '{}' not found in the config's locations", name))
+            .map_err(anyhow::Error::msg)
     }
 }
